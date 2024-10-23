@@ -2,14 +2,14 @@ import 'package:ecommerce_uts/screens/login_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class RecoveryScreen extends StatefulWidget {
-  const RecoveryScreen({super.key});
+class RecoveryNumberVerify extends StatefulWidget {
+  const RecoveryNumberVerify({super.key});
 
   @override
-  State<RecoveryScreen> createState() => _RecoveryScreenState();
+  State<RecoveryNumberVerify> createState() => _RecoveryNumberVerifyState();
 }
 
-class _RecoveryScreenState extends State<RecoveryScreen> {
+class _RecoveryNumberVerifyState extends State<RecoveryNumberVerify> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,16 +33,6 @@ class _RecoveryScreenState extends State<RecoveryScreen> {
               ),
               SizedBox(
                 height: 60,
-              ),
-              TextFormField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: "Reset Code",
-                  prefixIcon: Icon(Icons.numbers),
-                ),
-              ),
-              SizedBox(
-                height: 20,
               ),
               TextFormField(
                 obscureText: true,

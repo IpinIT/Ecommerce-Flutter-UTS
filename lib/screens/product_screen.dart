@@ -1,9 +1,13 @@
 import 'package:ecommerce_uts/screens/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class ProductScreen extends StatelessWidget {
   final Item selectedItem;
   final VoidCallback onAddToCart;
+
+  // Inisialisasi formatter untuk format rupiah
+  final NumberFormat currencyFormatter = NumberFormat.currency(locale: 'id_ID', symbol: 'Rp', decimalDigits: 0);
 
   ProductScreen({required this.selectedItem, required this.onAddToCart});
 
@@ -11,7 +15,16 @@ class ProductScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(selectedItem.name),
+        title: Center(
+          child: Text(
+            selectedItem.name,
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 26,
+            ),
+          ),
+        ),
         backgroundColor: Color(0xFF6C63FF),
       ),
       body: Padding(
@@ -40,17 +53,27 @@ class ProductScreen extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Text(
-              '\$${selectedItem.price}',
+              currencyFormatter.format(selectedItem.price), // Menggunakan selectedItem.price
               style: TextStyle(
-                fontSize: 20,
+                fontSize: 22,
                 fontWeight: FontWeight.bold,
-                color: Color(0xFF6C63FF),
+                color: Colors.black,
               ),
+            ),
+            SizedBox(height: 10),
+            // Menampilkan rating bintang
+            Row(
+              children: List.generate(5, (index) {
+                return Icon(
+                  index < selectedItem.rating ? Icons.star : Icons.star_border,
+                  color: Colors.amber,
+                );
+              }),
             ),
             SizedBox(height: 20),
             Text(
-              "Deskripsi produk akan ditampilkan di sini.",
-              style: TextStyle(fontSize: 16),
+              "Fitur Unggulan: \nMudah Dicuci: Bahan katun yang mudah dirawat. \n\nTahan Lama: Kualitas bahan yang tidak mudah pudar, meskipun sering dicuci. \n\nFleksibel: Cocok untuk berbagai acara. \n\nCara Perawatan: Cuci dengan air dingin, jangan gunakan pemutih.",
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
             ),
             SizedBox(height: 20),
             Center(
@@ -62,12 +85,18 @@ class ProductScreen extends StatelessWidget {
                   ));
                   Navigator.pop(context); // Kembali ke HomeScreen
                 },
-                icon: Icon(Icons.add_shopping_cart),
-                label: Text("Add to Cart"),
+                icon: Icon(Icons.add_shopping_cart, color: Colors.white),
+                label: Text(
+                  "Add to Cart",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Color(0xFF6C63FF),
                   padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-                  textStyle: TextStyle(fontSize: 18),
+                  textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
                 ),
               ),
             ),

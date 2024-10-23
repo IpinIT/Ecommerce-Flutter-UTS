@@ -37,7 +37,7 @@ class SignupScreen extends StatelessWidget {
                           height: 15,
                         ),
                         TextFormField(
-                          obscureText: true,
+                          obscureText: false,
                           decoration: InputDecoration(
                             labelText: "Enter Email",
                             border: OutlineInputBorder(),
@@ -48,7 +48,7 @@ class SignupScreen extends StatelessWidget {
                           height: 15,
                         ),
                         TextFormField(
-                          obscureText: true,
+                          obscureText: false,
                           decoration: InputDecoration(
                             labelText: "Enter Number",
                             border: OutlineInputBorder(),

@@ -1,6 +1,6 @@
+import 'package:ecommerce_uts/screens/recovery_number_verify.dart';
 import 'package:ecommerce_uts/screens/recovery_screen.dart';
 import 'package:flutter/material.dart';
-// import 'package:sms_otp_auto_verify/sms_otp_auto_verify.dart';
 
 class OTPVerifyScreen extends StatefulWidget {
   const OTPVerifyScreen({super.key});
@@ -10,15 +10,7 @@ class OTPVerifyScreen extends StatefulWidget {
 }
 
 class _OTPVerifyScreenState extends State<OTPVerifyScreen> {
-  BoxDecoration get _pinPutDecoration {
-    return BoxDecoration(
-      border: Border.all(color: Theme.of(context).primaryColor),
-      borderRadius: BorderRadius.circular(15.0),
-    );
-  }
-
-  TextEditingController textEditingController =
-      new TextEditingController(text: "");
+  final List<TextEditingController> _otpControllers = List.generate(4, (_) => TextEditingController());
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +25,7 @@ class _OTPVerifyScreenState extends State<OTPVerifyScreen> {
           padding: EdgeInsets.symmetric(horizontal: 15),
           child: Column(
             children: [
-              SizedBox(
-                height: 10,
-              ),
+              SizedBox(height: 20),
               Align(
                 alignment: Alignment.topLeft,
                 child: Text(
@@ -46,49 +36,72 @@ class _OTPVerifyScreenState extends State<OTPVerifyScreen> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 100,
-              ),
+              SizedBox(height: 20),
               Align(
                 alignment: Alignment.center,
                 child: Text(
-                "Please check the OTP that we have sent to your number.",
-                style: TextStyle(
-                  fontSize: 15,
+                  "Please check the OTP that we have sent to your number.",
+                  style: TextStyle(
+                    fontSize: 15,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
               ),
+              SizedBox(height: 50),
+
+              // Input OTP
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: List.generate(4, (index) {
+                    return Container(
+                      width: 40,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Theme.of(context).primaryColor),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: TextField(
+                        controller: _otpControllers[index],
+                        textAlign: TextAlign.center,
+                        keyboardType: TextInputType.number,
+                        maxLength: 1, // Hanya 1 karakter per kotak
+                        decoration: InputDecoration(
+                          counterText: "",
+                          border: InputBorder.none,
+                        ),
+                        style: TextStyle(fontSize: 24),
+                        onChanged: (value) {
+                          // Pindah ke kotak berikutnya jika ada input
+                          if (value.length == 1 && index < 5) {
+                            FocusScope.of(context).nextFocus();
+                          }
+                          // Kembali ke kotak sebelumnya jika karakter dihapus
+                          if (value.isEmpty && index > 0) {
+                            FocusScope.of(context).previousFocus();
+                          }
+                        },
+                      ),
+                    );
+                  }),
+                ),
               ),
-              
-              SizedBox(
-                height: 30,
-              ),
-              // TextFieldPin(
-              //     textController: textEditingController,
-              //     autoFocus: false,
-              //     codeLength: 4,
-              //     alignment: MainAxisAlignment.center,
-              //     defaultBoxSize: 60.0,
-              //     margin: 10,
-              //     selectedBoxSize: 55.0,
-              //     textStyle: TextStyle(fontSize: 16),
-              //     defaultDecoration: _pinPutDecoration.copyWith(
-              //         border: Border.all(
-              //             color:
-              //                 Theme.of(context).primaryColor.withOpacity(0.6))),
-              //     selectedDecoration: _pinPutDecoration,
-              //     onChange: (code) {
-              //       setState(() {});
-              //     }),
-                  SizedBox(
-                height: 30,
-              ),
+
+              SizedBox(height: 40),
+
+              // Tombol Verifikasi
               ElevatedButton(
                 onPressed: () {
+                  // Logika verifikasi OTP bisa ditambahkan di sini
+                  String otp = _otpControllers.map((controller) => controller.text).join();
+                  print("OTP Entered: $otp"); // Cetak OTP yang dimasukkan
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => RecoveryScreen(),
-                      ));
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => RecoveryNumberVerify(),
+                    ),
+                  );
                 },
                 child: Text(
                   "Verify",
@@ -100,7 +113,8 @@ class _OTPVerifyScreenState extends State<OTPVerifyScreen> {
                   minimumSize: Size.fromHeight(55),
                   backgroundColor: Color(0xFF6C63FF),
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8)),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                   foregroundColor: Colors.white,
                 ),
               ),

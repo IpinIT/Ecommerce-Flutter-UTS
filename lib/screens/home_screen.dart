@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:ecommerce_uts/screens/product_screen.dart';
 import 'cart_screen.dart';
+import 'package:intl/intl.dart'; //
 
 class Item {
   String name;
   double price;
   String imagePath;
+  int quantity;
+  int rating;
 
-  Item({required this.name, required this.price, required this.imagePath});
+  Item(
+      {required this.name,
+      required this.price,
+      required this.imagePath,
+      required this.rating,
+      this.quantity = 1});
 }
 
 class HomeScreen extends StatefulWidget {
@@ -16,23 +24,42 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<Item> cart = []; // Keranjang belanja, diinisialisasi sebagai List<Item>
+  List<Item> cart = [];
+  double totalPrice = 0.0;
 
   List<String> tabs = ["All", "Category", "Top", "Recommended"];
 
   List<Item> availableItems = [
-    Item(name: 'Warm Zipper', price: 80, imagePath: 'images/image1.jpg'),
-    Item(name: 'Knitted Woo!', price: 20, imagePath: 'images/image2.jpg'),
-    Item(name: 'Zipper Win', price: 30, imagePath: 'images/image3.jpg'),
-    Item(name: 'Child Win', price: 50, imagePath: 'images/image4.jpg'),
+    Item(name: 'Warm Zipper', price: 50000.0, rating: 4, imagePath: 'images/image1.jpg'),
+    Item(name: 'Knitted Woo!', price: 100000.0, rating: 5, imagePath: 'images/image2.jpg'),
+    Item(name: 'Zipper Win', price: 150000.0, rating: 4, imagePath: 'images/image3.jpg'),
+    Item(name: 'Child Win', price: 200000.0, rating: 5, imagePath: 'images/image4.jpg'),
   ];
+
+  final NumberFormat currencyFormatter =
+      NumberFormat.currency(locale: 'id_ID', symbol: 'Rp', decimalDigits: 0);
 
   List<String> reviews = ["300", "800", "600", "100"];
 
   // Fungsi untuk menambahkan item ke keranjang
   void addToCart(Item item) {
     setState(() {
-      cart.add(item); // Tambah satu Item, bukan List<Item>
+      // Cek apakah item sudah ada di keranjang
+      final existingItem = cart.firstWhere(
+          (cartItem) => cartItem.name == item.name,
+          orElse: () => Item(name: '', price: 0, imagePath: '', rating: item.rating));
+
+      if (existingItem.name != '') {
+        // Jika item sudah ada di keranjang, tambahkan quantity-nya
+        existingItem.quantity++;
+      } else {
+        // Jika item belum ada di keranjang, tambahkan dengan quantity 1
+        cart.add(Item(
+            name: item.name,
+            price: item.price,
+            imagePath: item.imagePath,
+            quantity: 1, rating: item.rating));
+      }
     });
   }
 
@@ -45,11 +72,13 @@ class _HomeScreenState extends State<HomeScreen> {
           style: TextStyle(
             fontSize: 30,
             fontWeight: FontWeight.bold,
+            color: Colors.white
           ),
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.shopping_cart),
+            icon: Icon(Icons.shopping_cart,
+            color: Colors.white,),
             onPressed: () {
               Navigator.push(
                 context,
@@ -60,6 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
             },
           ),
         ],
+        backgroundColor: Color(0xFF6C63FF),
       ),
       body: SingleChildScrollView(
         child: SafeArea(
@@ -238,7 +268,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   SizedBox(
                                     width: 120,
                                     child: Text(
-                                      "Deskripsi singkat produk",
+                                      "Mudah dirawat, Tahan lama, dan Fleksibel",
                                       maxLines: 4,
                                       overflow: TextOverflow.ellipsis,
                                     ),
@@ -254,12 +284,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                       Text('(${reviews[index]})'),
                                       SizedBox(width: 10),
                                       Text(
-                                        '\$${availableItems[index].price}',
+                                        '${currencyFormatter.format(availableItems[index].price)}',
                                         style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                          color: Color(0xFF6C63FF),
-                                        ),
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black),
                                       ),
                                     ],
                                   ),
@@ -372,12 +401,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Text('(${reviews[index]})'),
                                 SizedBox(width: 10),
                                 Text(
-                                  '\$${availableItems[index].price}',
+                                  '${currencyFormatter.format(availableItems[index].price)}',
                                   style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color(0xFF6C63FF),
-                                  ),
+                                      fontSize: 14,fontWeight: FontWeight.bold, color: Colors.black),
                                 ),
                               ],
                             ),

@@ -1,5 +1,8 @@
 
+import 'package:ecommerce_uts/screens/home_screen.dart';
+import 'package:ecommerce_uts/screens/login_screen.dart';
 import 'package:ecommerce_uts/screens/navigation_screen.dart';
+import 'package:ecommerce_uts/screens/splash_screen.dart';
 
 import 'package:flutter/material.dart';
 
@@ -17,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Color(0xFF6C63FF),
       ),
-      home: NavigationScreen(),
+      home: SplashScreen(),
     );
   }
 }
