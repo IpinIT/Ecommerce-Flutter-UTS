@@ -165,7 +165,7 @@ class ProductDetailsPopup extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => CartScreen(cartItems: [],)));
+                              builder: (context) => CartScreen()));
                     },
                     child: ContainerButtonModel(
                       itext: "Checkout",
