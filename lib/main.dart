@@ -1,8 +1,6 @@
-import 'package:ecommerce_uts/screens/home_screen.dart';
-import 'package:ecommerce_uts/screens/login_screen.dart';
+
 import 'package:ecommerce_uts/screens/navigation_screen.dart';
-import 'package:ecommerce_uts/screens/onboarding_screen.dart';
-import 'package:ecommerce_uts/screens/splash_screen.dart';
+
 import 'package:flutter/material.dart';
 
 void main() {

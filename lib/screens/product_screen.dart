@@ -14,10 +14,18 @@ class ProductScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Product Overview"),
+        leading: BackButton(),
+        backgroundColor: Colors.transparent,
+        foregroundColor: Colors.black,
+        elevation: 0,
+        centerTitle: true,
+      ),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Padding(
-            padding: EdgeInsets.all(20),
+            padding: EdgeInsets.all(15),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -113,7 +121,7 @@ class ProductScreen extends StatelessWidget {
                       height: 60,
                       width: 60,
                       decoration: BoxDecoration(
-                        color: Color(0xF989797),
+                        color: Color(0x1F989797),
                         borderRadius: BorderRadius.circular(30),
                       ),
                       child: Center(
@@ -122,10 +130,11 @@ class ProductScreen extends StatelessWidget {
                           color: Color(0xFF6C63FF),
                         ),
                       ),
-                    )
+                    ),
+                    ProductDetailsPopup(),
                   ],
                 ),
-                ProductDetailsPopup(),
+                
               ],
             ),
           ),

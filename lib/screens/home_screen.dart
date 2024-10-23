@@ -270,7 +270,7 @@ class HomeScreen extends StatelessWidget {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    "Newest Products",
+                    "Latest Products",
                     style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,

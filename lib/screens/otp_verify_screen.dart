@@ -1,6 +1,6 @@
 import 'package:ecommerce_uts/screens/recovery_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:sms_otp_auto_verify/sms_otp_auto_verify.dart';
+// import 'package:sms_otp_auto_verify/sms_otp_auto_verify.dart';
 
 class OTPVerifyScreen extends StatefulWidget {
   const OTPVerifyScreen({super.key});
@@ -62,23 +62,23 @@ class _OTPVerifyScreenState extends State<OTPVerifyScreen> {
               SizedBox(
                 height: 30,
               ),
-              TextFieldPin(
-                  textController: textEditingController,
-                  autoFocus: false,
-                  codeLength: 4,
-                  alignment: MainAxisAlignment.center,
-                  defaultBoxSize: 60.0,
-                  margin: 10,
-                  selectedBoxSize: 55.0,
-                  textStyle: TextStyle(fontSize: 16),
-                  defaultDecoration: _pinPutDecoration.copyWith(
-                      border: Border.all(
-                          color:
-                              Theme.of(context).primaryColor.withOpacity(0.6))),
-                  selectedDecoration: _pinPutDecoration,
-                  onChange: (code) {
-                    setState(() {});
-                  }),
+              // TextFieldPin(
+              //     textController: textEditingController,
+              //     autoFocus: false,
+              //     codeLength: 4,
+              //     alignment: MainAxisAlignment.center,
+              //     defaultBoxSize: 60.0,
+              //     margin: 10,
+              //     selectedBoxSize: 55.0,
+              //     textStyle: TextStyle(fontSize: 16),
+              //     defaultDecoration: _pinPutDecoration.copyWith(
+              //         border: Border.all(
+              //             color:
+              //                 Theme.of(context).primaryColor.withOpacity(0.6))),
+              //     selectedDecoration: _pinPutDecoration,
+              //     onChange: (code) {
+              //       setState(() {});
+              //     }),
                   SizedBox(
                 height: 30,
               ),

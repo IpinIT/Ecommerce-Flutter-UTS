@@ -1,5 +1,6 @@
 import 'package:ecommerce_uts/screens/forgot_screen.dart';
 import 'package:ecommerce_uts/screens/home_screen.dart';
+import 'package:ecommerce_uts/screens/navigation_screen.dart';
 import 'package:ecommerce_uts/screens/signup_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -72,7 +73,7 @@ class LoginScreen extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => HomeScreen(),
+                                  builder: (context) => NavigationScreen(),
                                 ));
                           },
                           child: Text(

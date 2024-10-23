@@ -30,24 +30,13 @@ class _NavigationScreenState extends State<NavigationScreen> {
         children: pages,
       ),
       floatingActionButton: SafeArea(
-        child: Container(
-          decoration: BoxDecoration(
-            shape: BoxShape
-                .circle, // Bentuk lingkaran untuk mengikuti bentuk button
-            border: Border.all(
-              color: Color(0xFF6C63FF), // Warna garis luar biru
-              width: 4.0, // Ketebalan garis luar
-            ),
+        child: FloatingActionButton(
+          onPressed: () {},
+          child: Icon(
+            Icons.qr_code_2,
+            size: 20,
           ),
-          child: FloatingActionButton(
-            onPressed: () {},
-            child: Icon(
-              Icons.qr_code_2,
-              size: 20,
-              color: Colors.black, // Ubah warna ikon jika diperlukan
-            ),
-            backgroundColor: Color.fromARGB(255, 255, 255, 255),
-          ),
+          backgroundColor: Color.fromARGB(255, 255, 255, 255),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
